@@ -1,13 +1,36 @@
 serve:
   cookies:
     same_site_mode: Lax
+  admin:
+    cors:
+      enabled: false
+  public:
+    cors:
+      enabled: true
+      allowed_origins:
+        - http://localhost:3001
+        - http://localhost:3002
+      allowed_methods:
+        - POST
+        - GET
+        - PUT
+        - PATCH
+        - DELETE
+      allowed_headers:
+        - Authorization
+        - Content-Type
+      exposed_headers:
+        - Content-Type
 
 urls:
   self:
-    issuer: http://127.0.0.1:4444
-  consent: http://127.0.0.1:3000/consent
-  login: http://127.0.0.1:3000/login
-  logout: http://127.0.0.1:3000/logout
+    issuer: http://45.141.100.7:4444
+  consent: http://45.141.100.7:4455/consent
+  login: http://45.141.100.7:4455/login
+  logout: http://45.141.100.7:4455/logout
+  identity_provider:
+    publicUrl: http://45.141.100.7:4433
+    url: http://45.141.100.7:4434
 
 secrets:
   system:
@@ -20,3 +43,7 @@ oidc:
       - public
     pairwise:
       salt: youReallyNeedToChangeThis
+
+log:
+  leak_sensitive_values: true
+  level: debug
